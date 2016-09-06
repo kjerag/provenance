@@ -65,10 +65,10 @@ func (t *SimpleChaincode) Invoke(stub *shim.ChaincodeStub, function string, args
 func (t *SimpleChaincode) Query(stub *shim.ChaincodeStub, function string, args []string) ([]byte, error) {
   fmt.Println("Query is running " + function + ".")
   // Handle different functions
-  if function == "dummy_query" {						//read a variable
-    fmt.Println("hi there " + function)						//error
+  if function == "dummy_query" {
+    fmt.Println("Hi there " + function + "!")
     return nil, nil;
-  } else if function = "read" {
+  } else if function == "read" {
     return t.read(stub, args)
   }
   fmt.Println("Query did not find func: " + function + ".")			//error
