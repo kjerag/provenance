@@ -103,5 +103,9 @@ func (t *SimpleChaincode) read(stub *shim.ChaincodeStub, args []string) ([]byte,
     jsonResp = "{\"Error\":\"Failed to get state for " + key + ".\"}"
     return nil, errors.New(jsonResp)
   }
+  if valAsBytes == nil {
+    jsonResp = "{\"Error\":\"Cannot find key " + key + " in the BlockChain.\"}"
+    return nil, errors.New(jsonResp)
+  }
   return valAsbytes, nil
 }
