@@ -57,7 +57,7 @@ func (t *SimpleChaincode) Invoke(stub *shim.ChaincodeStub, function string, args
   if function == "init" {
     return t.Init(stub, "init", args)
   }
-  fmt.Println("Invoke did not find function: '" + function + "'.")		//error
+  fmt.Println("Invoke did not find function: " + function + ".")		//error
   return nil, errors.New("Received unknown function invocation.")
 }
 
@@ -71,7 +71,7 @@ func (t *SimpleChaincode) Query(stub *shim.ChaincodeStub, function string, args 
   } else if function == "read" {
     return t.read(stub, args)
   }
-  fmt.Println("Query did not find function: '" + function + "'.")		//error
+  fmt.Println("Query did not find function: " + function + ".")			//error
   return nil, errors.New("Received unknown function query.")
 }
 
@@ -100,11 +100,11 @@ func (t *SimpleChaincode) read(stub *shim.ChaincodeStub, args []string) ([]byte,
   key = args[0]
   valAsbytes, err := stub.GetState(key)
   if err != nil {
-    jsonResp = "{\"Error\":\"Failed to get state for '" + key + "'.\"}"
+    jsonResp = "{\"Error\":\"Failed to get state for key: " + key + ".\"}"
     return nil, errors.New(jsonResp)
   }
   if valAsbytes == nil {
-    jsonResp = "{\"Error\":\"Cannot find key '" + key + "' in the BlockChain.\"}"
+    jsonResp = "{\"Error\":\"Cannot find BlockChain key: " + key + ".\"}"
     return nil, errors.New(jsonResp)
   }
   return valAsbytes, nil
