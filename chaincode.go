@@ -38,7 +38,7 @@ func main() {
 }
 
 // Init resets all the things
-func (t *SimpleChaincode) Init(stub shim.ChaincodeStub, function string, args []string) ([]byte, error) {
+func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
   if len(args) != 1 {
     return nil, errors.New("Incorrect number of arguments. Expecting 1.")
   }
@@ -46,7 +46,7 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStub, function string, args []
 }
 
 // Invoke is our entry point to invoke a chaincode function
-func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStub, function string, args []string) ([]byte, error) {
+func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
   fmt.Println("Invoke is running " + function + ".")
   // Handle different functions
   if function == "init" {
@@ -62,7 +62,7 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStub, function string, args 
 }
 
 // Query is our entry point for queries
-func (t *SimpleChaincode) Query(stub shim.ChaincodeStub, function string, args []string) ([]byte, error) {
+func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
   fmt.Println("Query is running " + function + ".")
   // Handle different functions
   if function == "dummy_query" {
@@ -75,7 +75,7 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStub, function string, args [
   return nil, errors.New("Received unknown function query.")
 }
 
-func (t *SimpleChaincode) write(stub shim.ChaincodeStub, args []string) ([]byte, error) {
+func (t *SimpleChaincode) write(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
   var key, value string
   var err error
   fmt.Println("Running write().")
@@ -91,7 +91,7 @@ func (t *SimpleChaincode) write(stub shim.ChaincodeStub, args []string) ([]byte,
   return nil, nil
 }
 
-func (t *SimpleChaincode) read(stub shim.ChaincodeStub, args []string) ([]byte, error) {
+func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
   var key, jsonResp string
   var err error
   if len(args) != 1 {
